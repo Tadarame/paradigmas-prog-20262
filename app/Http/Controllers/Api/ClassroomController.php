@@ -7,6 +7,7 @@ use App\Http\Requests\ClassroomRequest;
 use App\Http\Resources\ClassroomResource;
 use App\Http\Services\ClassroomService;
 use Illuminate\Http\Request;
+use App\Http\Requests\ClassroomUserRequest;
 
 class ClassroomController extends Controller
 {
@@ -53,5 +54,11 @@ class ClassroomController extends Controller
         $this->classroomService->destroy($id);
 
         return response()->noContent();
+    }
+    public function manageUser(ClassroomUserRequest $request, string $id)
+    {
+        return response()->json(
+            $this->classroomService->manageUser($id, $request->validated())
+        );
     }
 }
